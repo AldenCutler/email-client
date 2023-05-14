@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('b_Y-wT23jFoOzLFJG');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById('contact-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps. If you are recreating this project, you will need to create your own IDs.
+                emailjs.sendForm('service_d5nizfe', 'template_exw1wox', this)
+                    .then(function () {
+                        console.log('SUCCESS!');
+                    }, function (error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
+    <title>Email Client</title>
+</head>
+
+<body>
+    <div class="container">
+        <form id="contact-form">
+            <input type="hidden" name="contact_number">
+            <label>Name:</label>
+            <input type="text" name="user_name" placeholder="Name">
+            <label>Email:</label>
+            <input type="email" name="user_email" placeholder="example@example.com">
+            <label>Message:</label>
+            <textarea placeholder="Message" rows="10" cols="50" name="message"></textarea>
+            <br>
+            <input type="submit" value="Send">
+        </form>
+
+
+    </div>
+</body>
+<!-- <script src="main.js"></script> -->
+
+</html>
